@@ -1012,29 +1012,46 @@
   </footer>
 
   <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-    // ── Waitlist form handler ──
-    function handleWaitlist(e, successId) {
+    // ── Supabase waitlist ──
+    const SUPABASE_URL = 'https://bvjukzpsuojmqvnpmgjd.supabase.co'
+    const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ2anVrenBzdW9qbXF2bnBtZ2pkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI4NzQ4MzQsImV4cCI6MjA4ODQ1MDgzNH0.O4iUMhVmW8RIGWam1IvO5Zb61cz1JW2e_GAMjo6Abks'
+
+    async function handleWaitlist(e, successId) {
       e.preventDefault()
       const emailId = successId === 'hero-success' ? 'hero-email' : 'bottom-email'
-      const email = document.getElementById(emailId).value
-
-      // Send to your backend / Zoho / Airtable here
-      // For now, show success message
+      const email = document.getElementById(emailId).value.trim()
       const form = e.target
       const success = document.getElementById(successId)
 
-      if (successId === 'hero-success') {
-        form.style.display = 'none'
-        success.style.display = 'block'
-        success.style.opacity = '1'
-        success.style.color = 'var(--sage)'
-        success.style.fontSize = '13px'
-      } else {
-        form.style.display = 'none'
-        success.style.display = 'flex'
-      }
+      if (!email) return
 
-      // TODO: POST to your waitlist endpoint
-      // fetch('/api/waitlist', { method: 'POST', body: JSON.stringify({ email }) })
-      console.log('Waitlist signup:', email)
+      try {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/waitlist`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': SUPABASE_ANON,
+            'Authorization': `Bearer ${SUPABASE_ANON}`,
+            'Prefer': 'return=minimal'
+          },
+          body: JSON.stringify({ email })
+        })
+
+        if (res.ok || res.status === 409) {
+          if (successId === 'hero-success') {
+            form.style.display = 'none'
+            success.style.display = 'block'
+            success.style.opacity = '1'
+            success.style.color = 'var(--sage)'
+            success.style.fontSize = '13px'
+          } else {
+            form.style.display = 'none'
+            success.style.display = 'flex'
+          }
+        } else {
+          console.error('Waitlist error:', res.status)
+        }
+      } catch (err) {
+        console.error('Waitlist fetch error:', err)
+      }
     }
