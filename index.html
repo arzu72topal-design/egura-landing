@@ -829,7 +829,7 @@
 
       <div class="waitlist-form">
         <input type="email" class="waitlist-input" placeholder="your@email.com" required id="hero-email" />
-        <button type="button" class="waitlist-btn" onclick="handleWaitlist(event, 'hero-success')">Get Early Access</button>
+        <button type="button" class="waitlist-btn" onclick="window.handleWaitlist(event, 'hero-success')">Get Early Access</button>
       </div>
       <p class="waitlist-note" id="hero-success">✓ You're on the list! We'll be in touch.</p>
       <p class="waitlist-note" style="margin-top: 8px;">No spam. Unsubscribe anytime.</p>
@@ -984,7 +984,7 @@
 
     <div class="waitlist-form-lg reveal">
       <input type="email" class="waitlist-input" placeholder="your@email.com" required id="bottom-email" />
-      <button type="button" class="waitlist-btn" onclick="handleWaitlist(event, 'bottom-success')">Join Waitlist</button>
+      <button type="button" class="waitlist-btn" onclick="window.handleWaitlist(event, 'bottom-success')">Join Waitlist</button>
     </div>
 
     <div class="success-msg" id="bottom-success">
