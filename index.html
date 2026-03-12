@@ -1011,10 +1011,10 @@
     </div>
   </footer>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-    // ── Supabase waitlist ──
+  <script>
     const SUPABASE_URL = 'https://bvjukzpsuojmqvnpmgjd.supabase.co'
     const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ2anVrenBzdW9qbXF2bnBtZ2pkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI4NzQ4MzQsImV4cCI6MjA4ODQ1MDgzNH0.O4iUMhVmW8RIGWam1IvO5Zb61cz1JW2e_GAMjo6Abks'
+    const RESEND_KEY = 're_H7NjcpvB_E5XcG2YeAkH9rSJbFqFq4NDr'
 
     async function handleWaitlist(e, successId) {
       e.preventDefault()
@@ -1026,6 +1026,7 @@
       if (!email) return
 
       try {
+        // 1. Supabase'e kaydet
         const res = await fetch(`${SUPABASE_URL}/rest/v1/waitlist`, {
           method: 'POST',
           headers: {
@@ -1037,7 +1038,27 @@
           body: JSON.stringify({ email })
         })
 
+        // 2. Resend ile bildirim gönder (yeni kayıt veya zaten var)
         if (res.ok || res.status === 409) {
+          const isNew = res.ok
+
+          await fetch('https://api.resend.com/emails', {
+            method: 'POST',
+            headers: {
+              'Authorization': `Bearer ${RESEND_KEY}`,
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              from: 'onboarding@resend.dev',
+              to: 'hello@egura.app',
+              subject: isNew ? '🎉 Yeni Waitlist Kaydı!' : '⚠️ Tekrar Deneme',
+              text: isNew
+                ? `Yeni waitlist kaydı: ${email}`
+                : `${email} zaten listede, tekrar denedi.`
+            })
+          })
+
+          // 3. Kullanıcıya başarı göster
           if (successId === 'hero-success') {
             form.style.display = 'none'
             success.style.display = 'block'
