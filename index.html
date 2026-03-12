@@ -827,10 +827,10 @@
         <span>AI-powered insights help you shop consciously and reduce waste.</span>
       </p>
 
-      <form class="waitlist-form" onsubmit="handleWaitlist(event, 'hero-success')">
+      <div class="waitlist-form">
         <input type="email" class="waitlist-input" placeholder="your@email.com" required id="hero-email" />
-        <button type="submit" class="waitlist-btn">Get Early Access</button>
-      </form>
+        <button type="button" class="waitlist-btn" onclick="handleWaitlist(event, 'hero-success')">Get Early Access</button>
+      </div>
       <p class="waitlist-note" id="hero-success">✓ You're on the list! We'll be in touch.</p>
       <p class="waitlist-note" style="margin-top: 8px;">No spam. Unsubscribe anytime.</p>
 
@@ -982,10 +982,10 @@
       </h2>
     </div>
 
-    <form class="waitlist-form-lg reveal" onsubmit="handleWaitlist(event, 'bottom-success')">
+    <div class="waitlist-form-lg reveal">
       <input type="email" class="waitlist-input" placeholder="your@email.com" required id="bottom-email" />
-      <button type="submit" class="waitlist-btn">Join Waitlist</button>
-    </form>
+      <button type="button" class="waitlist-btn" onclick="handleWaitlist(event, 'bottom-success')">Join Waitlist</button>
+    </div>
 
     <div class="success-msg" id="bottom-success">
       <span>✓</span>
@@ -1015,7 +1015,6 @@
     const SUPABASE_URL = 'https://bvjukzpsuojmqvnpmgjd.supabase.co'
     const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ2anVrenBzdW9qbXF2bnBtZ2pkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI4NzQ4MzQsImV4cCI6MjA4ODQ1MDgzNH0.O4iUMhVmW8RIGWam1IvO5Zb61cz1JW2e_GAMjo6Abks'
     async function handleWaitlist(e, successId) {
-      e.preventDefault()
       const emailId = successId === 'hero-success' ? 'hero-email' : 'bottom-email'
       const email = document.getElementById(emailId).value.trim()
       const form = e.target
