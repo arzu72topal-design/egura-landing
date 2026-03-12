@@ -1015,7 +1015,7 @@
     window.addEventListener("DOMContentLoaded", function() {
     const SUPABASE_URL = 'https://bvjukzpsuojmqvnpmgjd.supabase.co'
     const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ2anVrenBzdW9qbXF2bnBtZ2pkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI4NzQ4MzQsImV4cCI6MjA4ODQ1MDgzNH0.O4iUMhVmW8RIGWam1IvO5Zb61cz1JW2e_GAMjo6Abks'
-    async function handleWaitlist(e, successId) {
+    window.handleWaitlist = async function(e, successId) {
       const emailId = successId === 'hero-success' ? 'hero-email' : 'bottom-email'
       const email = document.getElementById(emailId).value.trim()
       const form = e.target
