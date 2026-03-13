@@ -12,18 +12,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet" />
   <style>
-    :root {
-      --cream: #D6C7A1;
-      --cream-light: #EDE5CF;
-      --cream-pale: #F5F0E4;
-      --forest: #2F4F4F;
-      --forest-mid: #3d6b6b;
-      --forest-light: #5a8f8f;
-      --sage: #8DA37E;
-      --amber: #D4A03C;
-      --amber-light: #E8BE6A;
-      --white: #FDFAF4;
-    }
+    :root { --cream: #D6C7A1; --cream-light: #EDE5CF; --cream-pale: #F5F0E4; --forest: #2F4F4F; --forest-mid: #3d6b6b; --forest-light: #5a8f8f; --sage: #8DA37E; --amber: #D4A03C; --amber-light: #E8BE6A; --white: #FDFAF4; }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body { font-family: 'DM Sans', sans-serif; background: var(--cream-pale); color: var(--forest); overflow-x: hidden; }
@@ -164,32 +153,20 @@
         <div class="hero-badge-dot"></div>
         Coming Soon · EU Digital Product Passport Ready
       </div>
-      <h1 class="hero-title">
-        Know what you own.<br>
-        <em>Buy smarter.</em><br>
-        <strong>Live lighter.</strong>
-      </h1>
-      <p class="hero-sub">
-        EGURA is your personal inventory OS — scan, track, and manage everything you own.
-        <span>AI-powered insights help you shop consciously and reduce waste.</span>
-      </p>
+      <h1 class="hero-title">Know what you own.<br><em>Buy smarter.</em><br><strong>Live lighter.</strong></h1>
+      <p class="hero-sub">EGURA is your personal inventory OS — scan, track, and manage everything you own. <span>AI-powered insights help you shop consciously and reduce waste.</span></p>
       <div class="waitlist-form" id="hero-form">
         <input type="email" class="waitlist-input" placeholder="your@email.com" id="hero-email" />
         <button type="button" class="waitlist-btn" onclick="handleWaitlist(event, 'hero-success', 'hero-form', 'hero-email')">Get Early Access</button>
       </div>
       <p class="waitlist-note" id="hero-success" style="display:none; opacity:1; color:var(--sage); font-size:13px;">✓ You're on the list! We'll be in touch.</p>
       <p class="waitlist-note" style="margin-top: 8px;">No spam. Unsubscribe anytime.</p>
-      <a href="https://v0-ai-inventory-review-update-oj.vercel.app" target="_blank" class="hero-demo-link">
+      <a href="https://app.egura.app" target="_blank" class="hero-demo-link">
         Try the live demo
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
-        </svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </a>
     </div>
-    <div class="scroll-indicator">
-      <span>Scroll</span>
-      <div class="scroll-line"></div>
-    </div>
+    <div class="scroll-indicator"><span>Scroll</span><div class="scroll-line"></div></div>
   </section>
 
   <div class="stats-bar">
@@ -271,13 +248,8 @@
       <input type="email" class="waitlist-input" placeholder="your@email.com" id="bottom-email" />
       <button type="button" class="waitlist-btn" onclick="handleWaitlist(event, 'bottom-success', 'bottom-form', 'bottom-email')">Join Waitlist</button>
     </div>
-    <div class="success-msg" id="bottom-success">
-      <span>✓</span>
-      <span>You're on the list! We'll reach out when EGURA launches.</span>
-    </div>
-    <p class="waitlist-note" style="margin-top: 12px; display: block; text-align: center;">
-      Questions? Write to <a href="mailto:hello@egura.app" style="color: var(--amber); text-decoration: none;">hello@egura.app</a>
-    </p>
+    <div class="success-msg" id="bottom-success"><span>✓</span><span>You're on the list! We'll reach out when EGURA launches.</span></div>
+    <p class="waitlist-note" style="margin-top: 12px; display: block; text-align: center;">Questions? Write to <a href="mailto:hello@egura.app" style="color: var(--amber); text-decoration: none;">hello@egura.app</a></p>
   </section>
 
   <footer>
@@ -285,7 +257,7 @@
     <ul class="footer-links">
       <li><a href="#features">Features</a></li>
       <li><a href="#mission">Mission</a></li>
-      <li><a href="https://v0-ai-inventory-review-update-oj.vercel.app" target="_blank">Live Demo</a></li>
+      <li><a href="https://app.egura.app" target="_blank">Live Demo</a></li>
       <li><a href="mailto:hello@egura.app">Contact</a></li>
     </ul>
     <div class="footer-mail"><a href="mailto:hello@egura.app">hello@egura.app</a></div>
@@ -314,19 +286,14 @@
       try {
         const res = await fetch(SUPABASE_URL + '/rest/v1/waitlist', {
           method: 'POST',
-          headers: {
-            'Content-Type':  'application/json',
-            'apikey':        SUPABASE_ANON,
-            'Authorization': 'Bearer ' + SUPABASE_ANON,
-            'Prefer':        'return=minimal'
-          },
+          headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_ANON, 'Authorization': 'Bearer ' + SUPABASE_ANON, 'Prefer': 'return=minimal' },
           body: JSON.stringify({ email: email })
         })
 
         console.log('Supabase status:', res.status)
 
         if (res.ok || res.status === 409) {
-          if (form)    form.style.display    = 'none'
+          if (form) form.style.display = 'none'
           if (success) {
             if (successId === 'hero-success') {
               success.style.cssText = 'display:block; opacity:1; color:var(--sage); font-size:13px;'
